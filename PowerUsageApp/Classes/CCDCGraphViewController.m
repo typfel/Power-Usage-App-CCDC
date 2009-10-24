@@ -31,16 +31,17 @@
 	
 	// Setup plot space
 	CPXYPlotSpace *plotSpace = (CPXYPlotSpace *)graph.defaultPlotSpace;
-	plotSpace.xRange = [CPPlotRange plotRangeWithLocation:CPDecimalFromFloat(1.0) length:CPDecimalFromFloat(10.0)];
-	plotSpace.yRange = [CPPlotRange plotRangeWithLocation:CPDecimalFromFloat(1.0) length:CPDecimalFromFloat(70.0)];
+	
+	plotSpace.xRange = [CPPlotRange plotRangeWithLocation:CPDecimalFromFloat(1.0) length:CPDecimalFromFloat(20.0)];
+	plotSpace.yRange = [CPPlotRange plotRangeWithLocation:CPDecimalFromFloat(1.0) length:CPDecimalFromFloat([[self maxkW] floatValue]+20)];
 	
 	
     // Axes
 	CPXYAxisSet *axisSet = (CPXYAxisSet *)graph.axisSet;
     CPXYAxis *x = axisSet.xAxis;
     x.majorIntervalLength = CPDecimalFromFloat(oneDay);
-    x.constantCoordinateValue = CPDecimalFromString(@"1");
-    x.minorTicksPerInterval = 0;
+    x.constantCoordinateValue = CPDecimalFromString(@"4");
+    x.minorTicksPerInterval = 5;
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
     dateFormatter.dateStyle = kCFDateFormatterShortStyle;
     CPTimeFormatter *timeFormatter = [[[CPTimeFormatter alloc] initWithDateFormatter:dateFormatter] autorelease];
@@ -48,9 +49,9 @@
     x.axisLabelFormatter = timeFormatter;
 	
 	CPXYAxis *y = axisSet.yAxis;
-	y.majorIntervalLength = CPDecimalFromString(@"1");
-	y.minorTicksPerInterval = 5;
-	y.constantCoordinateValue = CPDecimalFromString(@"1");
+	y.majorIntervalLength = CPDecimalFromString(@"5");
+	y.minorTicksPerInterval = 50;
+	y.constantCoordinateValue = CPDecimalFromString(@"4");
 	NSArray *exclusionRanges = [NSArray arrayWithObjects:
 								[CPPlotRange plotRangeWithLocation:CPDecimalFromFloat(1.99) length:CPDecimalFromFloat(0.02)], 
 								[CPPlotRange plotRangeWithLocation:CPDecimalFromFloat(0.99) length:CPDecimalFromFloat(0.02)],
@@ -112,6 +113,8 @@
 	 [contentArray addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:x, @"x", y, @"y", nil]];
 	 }*/
 	self.dataForPlot = [self loadAndPreprocessData];
+
+	NSLog(@"self.maxkW :  %d ", [[self maxkW] intValue]);
 }
 
 -(void)changePlotRange 
@@ -151,6 +154,37 @@
 	}
 	
 	return processedData;
+}
+
+
+// Returns the max kW value-
+- (NSInteger * ) maxkW{
+	// Load the previous recordings from disk
+	
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSString *documentsDirectory = [paths objectAtIndex:0];
+	if (!documentsDirectory) {
+		NSAssert(NO, @"Documents directory not found!");
+	}
+	
+	NSString *recordingsFile = [documentsDirectory stringByAppendingPathComponent:@"recordings.plist"];
+	NSArray *meterRecordings = [[NSMutableArray alloc] initWithContentsOfFile:recordingsFile];
+	
+	if (meterRecordings == nil)
+		meterRecordings = [[NSMutableArray alloc] init];
+	
+	
+	
+	NSNumber *maxKWValueSoFar = [NSNumber numberWithInt:0];
+	NSMutableArray *processedData = [NSMutableArray array];
+	for (NSDictionary *recording in meterRecordings) {
+		NSNumber *meterValue = [recording objectForKey:@"meterValue"];
+		if (meterValue > maxKWValueSoFar) {
+			maxKWValueSoFar = meterValue;
+		}
+	}
+	
+	return maxKWValueSoFar;
 }
 
 #pragma mark -

@@ -39,7 +39,7 @@
 	CPXYAxisSet *axisSet = (CPXYAxisSet *)graph.axisSet;
     CPXYAxis *x = axisSet.xAxis;
     x.majorIntervalLength = CPDecimalFromFloat(oneDay);
-    x.constantCoordinateValue = CPDecimalFromString(@"1");
+    x.constantCoordinateValue = CPDecimalFromString(@"10");
     x.minorTicksPerInterval = 0;
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
     dateFormatter.dateStyle = kCFDateFormatterShortStyle;
@@ -48,9 +48,9 @@
     x.axisLabelFormatter = timeFormatter;
   
   CPXYAxis *y = axisSet.yAxis;
-  y.majorIntervalLength = CPDecimalFromString(@"1");
+  y.majorIntervalLength = CPDecimalFromString(@"50");
   y.minorTicksPerInterval = 5;
-  y.constantCoordinateValue = CPDecimalFromString(@"1");
+  y.constantCoordinateValue = CPDecimalFromString(@"10");
   NSArray *exclusionRanges = [NSArray arrayWithObjects:
                      [CPPlotRange plotRangeWithLocation:CPDecimalFromFloat(1.99) length:CPDecimalFromFloat(0.02)], 
                      [CPPlotRange plotRangeWithLocation:CPDecimalFromFloat(0.99) length:CPDecimalFromFloat(0.02)],
