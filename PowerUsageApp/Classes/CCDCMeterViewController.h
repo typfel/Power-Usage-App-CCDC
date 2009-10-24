@@ -11,6 +11,7 @@
 
 @interface CCDCMeterViewController : UIViewController {
   UITextField *meterField;
+  NSMutableArray *meterRecordings;
 }
 
 @property (nonatomic, assign) IBOutlet UITextField *meterField;

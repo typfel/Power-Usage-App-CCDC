@@ -23,12 +23,26 @@
 }
 */
 
-/*
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
     [super viewDidLoad];
+  // Load the previous recordings from disk
+  
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  NSString *documentsDirectory = [paths objectAtIndex:0];
+  if (!documentsDirectory) {
+    NSAssert(NO, @"Documents directory not found!");
+  }
+  
+  NSString *recordingsFile = [documentsDirectory stringByAppendingPathComponent:@"recordings.plist"];
+  
+  meterRecordings = [[NSMutableArray alloc] initWithContentsOfFile:recordingsFile];
+  
+  if (meterRecordings == nil)
+    meterRecordings = [[NSMutableArray alloc] init];
 }
-*/
+
 
 /*
 // Override to allow orientations other than the default portrait orientation.
@@ -52,10 +66,33 @@
 
 - (IBAction)storeMeterReading:(id)sender {
   NSLog(@"Storing %@", meterField.text);
+  
+  NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+  NSNumber *meterValue = [numberFormatter numberFromString:meterField.text];
+  [numberFormatter release];
+  
+  NSMutableDictionary *recording = [[NSMutableDictionary alloc] init];
+  [recording setValue:meterValue forKey:@"meterValue"];
+  [recording setValue:[NSDate date] forKey:@"timestamp"];
+  
+  [meterRecordings addObject:recording];
+  [recording release];
+  
+  NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+  NSString *documentsDirectory = [paths objectAtIndex:0];
+  if (!documentsDirectory) {
+    NSAssert(NO, @"Documents directory not found!");
+  }
+  
+  NSString *recordingsFile = [documentsDirectory stringByAppendingPathComponent:@"recordings.plist"];
+  
+  if (![meterRecordings writeToFile:recordingsFile atomically:YES])
+    NSLog(@"Failed to store recording");
 }
 
 - (void)dealloc {
-    [super dealloc];
+  [meterRecordings release];
+  [super dealloc];
 }
 
 
