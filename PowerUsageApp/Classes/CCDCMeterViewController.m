@@ -11,7 +11,12 @@
 
 @implementation CCDCMeterViewController
 
-@synthesize meterField;
+@synthesize meterValue1;
+@synthesize meterValue2;
+@synthesize meterValue3;
+@synthesize meterValue4;
+@synthesize meterValue5;
+@synthesize meterValue6;
 
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -65,11 +70,17 @@
 }
 
 - (IBAction)storeMeterReading:(id)sender {
-  NSLog(@"Storing %@", meterField.text);
+  
+  
+  NSString *meterField = [NSString stringWithFormat:@"%@%@%@%@%@%@", 
+                          meterValue1.text, meterValue2.text, meterValue3.text,
+                          meterValue4.text, meterValue5.text, meterValue6.text];
   
   NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-  NSNumber *meterValue = [numberFormatter numberFromString:meterField.text];
+  NSNumber *meterValue = [numberFormatter numberFromString:meterField];
   [numberFormatter release];
+  
+  NSLog(@"Storing %i", [meterValue intValue]);
   
   NSMutableDictionary *recording = [[NSMutableDictionary alloc] init];
   [recording setValue:meterValue forKey:@"meterValue"];
@@ -88,6 +99,22 @@
   
   if (![meterRecordings writeToFile:recordingsFile atomically:YES])
     NSLog(@"Failed to store recording");
+}
+
+- (IBAction)valueEntered:(id)sender
+{
+  if (sender == meterValue1)
+    [meterValue2 becomeFirstResponder];
+  if (sender == meterValue2)
+    [meterValue3 becomeFirstResponder];
+  if (sender == meterValue3)
+    [meterValue4 becomeFirstResponder];
+  if (sender == meterValue4)
+    [meterValue5 becomeFirstResponder];
+  if (sender == meterValue5)
+    [meterValue6 becomeFirstResponder];
+  if (sender == meterValue6)
+    [meterValue6 resignFirstResponder];
 }
 
 - (void)dealloc {

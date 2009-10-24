@@ -10,12 +10,24 @@
 
 
 @interface CCDCMeterViewController : UIViewController {
-  UITextField *meterField;
+  UITextField *meterValue1;
+  UITextField *meterValue2;
+  UITextField *meterValue3;
+  UITextField *meterValue4;
+  UITextField *meterValue5;
+  UITextField *meterValue6;
+  
   NSMutableArray *meterRecordings;
 }
 
-@property (nonatomic, assign) IBOutlet UITextField *meterField;
+@property (nonatomic, assign) IBOutlet UITextField *meterValue1;
+@property (nonatomic, assign) IBOutlet UITextField *meterValue2;
+@property (nonatomic, assign) IBOutlet UITextField *meterValue3;
+@property (nonatomic, assign) IBOutlet UITextField *meterValue4;
+@property (nonatomic, assign) IBOutlet UITextField *meterValue5;
+@property (nonatomic, assign) IBOutlet UITextField *meterValue6;
 
 - (IBAction)storeMeterReading:(id)sender;
+- (IBAction)valueEntered:(id)sender;
 
 @end

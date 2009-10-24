@@ -11,6 +11,11 @@
 		1616612F1092880700EF7FB9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1616612E1092880700EF7FB9 /* QuartzCore.framework */; };
 		161661371092885400EF7FB9 /* CCDCGraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 161661351092885400EF7FB9 /* CCDCGraphViewController.m */; };
 		161661381092885400EF7FB9 /* GraphView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 161661361092885400EF7FB9 /* GraphView.xib */; };
+		1627B12A10939FFD0019F2CF /* average icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1627B12510939FFD0019F2CF /* average icon.png */; };
+		1627B12B10939FFD0019F2CF /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 1627B12610939FFD0019F2CF /* background.png */; };
+		1627B12C10939FFD0019F2CF /* meter icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1627B12710939FFD0019F2CF /* meter icon.png */; };
+		1627B12D10939FFD0019F2CF /* meter.png in Resources */ = {isa = PBXBuildFile; fileRef = 1627B12810939FFD0019F2CF /* meter.png */; };
+		1627B12E10939FFD0019F2CF /* progress icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1627B12910939FFD0019F2CF /* progress icon.png */; };
 		16D4447C1092618B002FECFA /* CCDCMeterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D4447A1092618B002FECFA /* CCDCMeterViewController.m */; };
 		16D4447D1092618B002FECFA /* MeterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16D4447B1092618B002FECFA /* MeterView.xib */; };
 		16D4452110927CD5002FECFA /* CCDCRead.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D4452010927CD5002FECFA /* CCDCRead.m */; };
@@ -21,7 +26,6 @@
 		288765080DF74369002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765070DF74369002DB57D /* CoreGraphics.framework */; };
 		28AD73880D9D96C1002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD73870D9D96C1002E5188 /* MainWindow.xib */; };
 		786BF48A1093580D00869617 /* CCDCDateController.m in Sources */ = {isa = PBXBuildFile; fileRef = 786BF4891093580D00869617 /* CCDCDateController.m */; };
-		786BF4CB109360F300869617 /* CCDCThirdTab.m in Sources */ = {isa = PBXBuildFile; fileRef = 786BF4C9109360F300869617 /* CCDCThirdTab.m */; };
 		786BF4CC109360F300869617 /* GraphDateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 786BF4CA109360F300869617 /* GraphDateView.xib */; };
 		786BF4FA1093654700869617 /* CCDCGraphDateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 786BF4F91093654700869617 /* CCDCGraphDateViewController.m */; };
 /* End PBXBuildFile section */
@@ -49,6 +53,11 @@
 		161661341092885400EF7FB9 /* CCDCGraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCDCGraphViewController.h; sourceTree = "<group>"; };
 		161661351092885400EF7FB9 /* CCDCGraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCDCGraphViewController.m; sourceTree = "<group>"; };
 		161661361092885400EF7FB9 /* GraphView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GraphView.xib; sourceTree = "<group>"; };
+		1627B12510939FFD0019F2CF /* average icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "average icon.png"; sourceTree = "<group>"; };
+		1627B12610939FFD0019F2CF /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		1627B12710939FFD0019F2CF /* meter icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "meter icon.png"; sourceTree = "<group>"; };
+		1627B12810939FFD0019F2CF /* meter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = meter.png; sourceTree = "<group>"; };
+		1627B12910939FFD0019F2CF /* progress icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "progress icon.png"; sourceTree = "<group>"; };
 		16D444791092618B002FECFA /* CCDCMeterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCDCMeterViewController.h; sourceTree = "<group>"; };
 		16D4447A1092618B002FECFA /* CCDCMeterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCDCMeterViewController.m; sourceTree = "<group>"; };
 		16D4447B1092618B002FECFA /* MeterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MeterView.xib; sourceTree = "<group>"; };
@@ -65,8 +74,6 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		786BF4881093580D00869617 /* CCDCDateController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCDCDateController.h; sourceTree = "<group>"; };
 		786BF4891093580D00869617 /* CCDCDateController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCDCDateController.m; sourceTree = "<group>"; };
-		786BF4C8109360F300869617 /* CCDCThirdTab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCDCThirdTab.h; sourceTree = "<group>"; };
-		786BF4C9109360F300869617 /* CCDCThirdTab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCDCThirdTab.m; sourceTree = "<group>"; };
 		786BF4CA109360F300869617 /* GraphDateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = GraphDateView.xib; path = Classes/GraphDateView.xib; sourceTree = "<group>"; };
 		786BF4F81093654700869617 /* CCDCGraphDateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCDCGraphDateViewController.h; sourceTree = "<group>"; };
 		786BF4F91093654700869617 /* CCDCGraphDateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCDCGraphDateViewController.m; sourceTree = "<group>"; };
@@ -104,8 +111,6 @@
 				16D4447A1092618B002FECFA /* CCDCMeterViewController.m */,
 				161661341092885400EF7FB9 /* CCDCGraphViewController.h */,
 				161661351092885400EF7FB9 /* CCDCGraphViewController.m */,
-				786BF4C8109360F300869617 /* CCDCThirdTab.h */,
-				786BF4C9109360F300869617 /* CCDCThirdTab.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -116,6 +121,18 @@
 				161661101092848A00EF7FB9 /* libCorePlot-CocoaTouch.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		1627B12F1093A0030019F2CF /* images */ = {
+			isa = PBXGroup;
+			children = (
+				1627B12510939FFD0019F2CF /* average icon.png */,
+				1627B12610939FFD0019F2CF /* background.png */,
+				1627B12710939FFD0019F2CF /* meter icon.png */,
+				1627B12810939FFD0019F2CF /* meter.png */,
+				1627B12910939FFD0019F2CF /* progress icon.png */,
+			);
+			name = images;
 			sourceTree = "<group>";
 		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
@@ -151,6 +168,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				1627B12F1093A0030019F2CF /* images */,
 				161661361092885400EF7FB9 /* GraphView.xib */,
 				16D4447B1092618B002FECFA /* MeterView.xib */,
 				786BF4CA109360F300869617 /* GraphDateView.xib */,
@@ -234,6 +252,11 @@
 				16D4447D1092618B002FECFA /* MeterView.xib in Resources */,
 				161661381092885400EF7FB9 /* GraphView.xib in Resources */,
 				786BF4CC109360F300869617 /* GraphDateView.xib in Resources */,
+				1627B12A10939FFD0019F2CF /* average icon.png in Resources */,
+				1627B12B10939FFD0019F2CF /* background.png in Resources */,
+				1627B12C10939FFD0019F2CF /* meter icon.png in Resources */,
+				1627B12D10939FFD0019F2CF /* meter.png in Resources */,
+				1627B12E10939FFD0019F2CF /* progress icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,7 +273,6 @@
 				16D4452110927CD5002FECFA /* CCDCRead.m in Sources */,
 				161661371092885400EF7FB9 /* CCDCGraphViewController.m in Sources */,
 				786BF48A1093580D00869617 /* CCDCDateController.m in Sources */,
-				786BF4CB109360F300869617 /* CCDCThirdTab.m in Sources */,
 				786BF4FA1093654700869617 /* CCDCGraphDateViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
