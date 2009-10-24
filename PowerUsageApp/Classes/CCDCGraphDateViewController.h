@@ -10,8 +10,8 @@
 #import "CorePlot-CocoaTouch.h"
 
 
-@interface CCDCGraphViewController : UIViewController <CPPlotDataSource> {
-	IBOutlet CPLayerHostingView *hostView;
+@interface CCDCGraphDateViewController : UIViewController <CPPlotDataSource> {
+	  IBOutlet CPLayerHostingView *hostView;
 	CPXYGraph *graph;
 	NSMutableArray *dataForPlot;
 	
