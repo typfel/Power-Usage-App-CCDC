@@ -10,7 +10,11 @@
 
 
 @interface CCDCMeterViewController : UIViewController {
-  
+  UITextField *meterField;
 }
+
+@property (nonatomic, assign) IBOutlet UITextField *meterField;
+
+- (IBAction)storeMeterReading:(id)sender;
 
 @end

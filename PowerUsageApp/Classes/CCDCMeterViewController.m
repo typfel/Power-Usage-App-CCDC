@@ -11,6 +11,8 @@
 
 @implementation CCDCMeterViewController
 
+@synthesize meterField;
+
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -48,6 +50,9 @@
 	// e.g. self.myOutlet = nil;
 }
 
+- (IBAction)storeMeterReading:(id)sender {
+  NSLog(@"Storing %@", meterField.text);
+}
 
 - (void)dealloc {
     [super dealloc];
