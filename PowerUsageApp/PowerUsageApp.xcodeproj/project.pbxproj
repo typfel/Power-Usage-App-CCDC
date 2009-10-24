@@ -16,6 +16,7 @@
 		1627B12C10939FFD0019F2CF /* meter icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1627B12710939FFD0019F2CF /* meter icon.png */; };
 		1627B12D10939FFD0019F2CF /* meter.png in Resources */ = {isa = PBXBuildFile; fileRef = 1627B12810939FFD0019F2CF /* meter.png */; };
 		1627B12E10939FFD0019F2CF /* progress icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1627B12910939FFD0019F2CF /* progress icon.png */; };
+		1627B1541093A4270019F2CF /* glass.png in Resources */ = {isa = PBXBuildFile; fileRef = 1627B1531093A4270019F2CF /* glass.png */; };
 		16D4447C1092618B002FECFA /* CCDCMeterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D4447A1092618B002FECFA /* CCDCMeterViewController.m */; };
 		16D4447D1092618B002FECFA /* MeterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 16D4447B1092618B002FECFA /* MeterView.xib */; };
 		16D4452110927CD5002FECFA /* CCDCRead.m in Sources */ = {isa = PBXBuildFile; fileRef = 16D4452010927CD5002FECFA /* CCDCRead.m */; };
@@ -58,6 +59,7 @@
 		1627B12710939FFD0019F2CF /* meter icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "meter icon.png"; sourceTree = "<group>"; };
 		1627B12810939FFD0019F2CF /* meter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = meter.png; sourceTree = "<group>"; };
 		1627B12910939FFD0019F2CF /* progress icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "progress icon.png"; sourceTree = "<group>"; };
+		1627B1531093A4270019F2CF /* glass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = glass.png; sourceTree = "<group>"; };
 		16D444791092618B002FECFA /* CCDCMeterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCDCMeterViewController.h; sourceTree = "<group>"; };
 		16D4447A1092618B002FECFA /* CCDCMeterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCDCMeterViewController.m; sourceTree = "<group>"; };
 		16D4447B1092618B002FECFA /* MeterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MeterView.xib; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 		1627B12F1093A0030019F2CF /* images */ = {
 			isa = PBXGroup;
 			children = (
+				1627B1531093A4270019F2CF /* glass.png */,
 				1627B12510939FFD0019F2CF /* average icon.png */,
 				1627B12610939FFD0019F2CF /* background.png */,
 				1627B12710939FFD0019F2CF /* meter icon.png */,
@@ -257,6 +260,7 @@
 				1627B12C10939FFD0019F2CF /* meter icon.png in Resources */,
 				1627B12D10939FFD0019F2CF /* meter.png in Resources */,
 				1627B12E10939FFD0019F2CF /* progress icon.png in Resources */,
+				1627B1541093A4270019F2CF /* glass.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
