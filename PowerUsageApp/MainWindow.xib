@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="124"/>
+			<integer value="106"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -53,40 +53,40 @@
 			<object class="IBUITabBarController" id="1034742383">
 				<object class="IBUISimulatedTabBarMetrics" key="IBUISimulatedBottomBarMetrics"/>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
-				<object class="IBUIViewController" key="IBUISelectedViewController" id="235012723">
-					<string key="IBUITitle">Register</string>
-					<object class="IBUITabBarItem" key="IBUITabBarItem" id="556686167">
-						<string key="IBUITitle">Record</string>
+				<object class="IBUIViewController" key="IBUISelectedViewController" id="268481961">
+					<string key="IBUITitle">kW Consumption</string>
+					<object class="IBUITabBarItem" key="IBUITabBarItem" id="807309489">
+						<string key="IBUITitle">Total kW</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">meter icon.png</string>
+							<string key="NSResourceName">average icon.png</string>
 						</object>
 						<reference key="IBUITabBar"/>
 					</object>
 					<reference key="IBUIParentViewController" ref="1034742383"/>
-					<string key="IBUINibName">MeterView</string>
-					<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
+					<string key="IBUINibName">GraphView</string>
 				</object>
 				<object class="NSMutableArray" key="IBUIViewControllers">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<reference ref="235012723"/>
-					<object class="IBUIViewController" id="268481961">
-						<string key="IBUITitle">kW Consumption</string>
-						<object class="IBUITabBarItem" key="IBUITabBarItem" id="807309489">
-							<string key="IBUITitle">kW Consumption</string>
+					<object class="IBUIViewController" id="235012723">
+						<string key="IBUITitle">Register</string>
+						<object class="IBUITabBarItem" key="IBUITabBarItem" id="556686167">
+							<string key="IBUITitle">Record</string>
 							<object class="NSCustomResource" key="IBUIImage">
 								<string key="NSClassName">NSImage</string>
-								<string key="NSResourceName">average icon.png</string>
+								<string key="NSResourceName">meter icon.png</string>
 							</object>
 							<reference key="IBUITabBar"/>
 						</object>
 						<reference key="IBUIParentViewController" ref="1034742383"/>
-						<string key="IBUINibName">GraphView</string>
+						<string key="IBUINibName">MeterView</string>
+						<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 					</object>
+					<reference ref="268481961"/>
 					<object class="IBUIViewController" id="289362281">
 						<string key="IBUITitle">kW Usage</string>
 						<object class="IBUITabBarItem" key="IBUITabBarItem" id="1045658399">
-							<string key="IBUITitle">kW Usage</string>
+							<string key="IBUITitle">kW Usage/Week</string>
 							<object class="NSCustomResource" key="IBUIImage">
 								<string key="NSClassName">NSImage</string>
 								<string key="NSResourceName">progress icon.png</string>

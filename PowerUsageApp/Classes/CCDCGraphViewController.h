@@ -17,7 +17,7 @@
 	
 }
 - (NSArray *)loadAndPreprocessData;
-- (NSInteger * ) maxkW;
+- (NSNumber * ) maxkW;
 @property(readwrite, retain, nonatomic) NSMutableArray *dataForPlot;
 
 @end

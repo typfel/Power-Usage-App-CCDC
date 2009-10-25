@@ -15,8 +15,13 @@
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	NSLog(@" Total Power consumption");
 	NSDate *refDate = [NSDate dateWithNaturalLanguageString:@"0:00 Jan 1, 2007"];
     NSTimeInterval oneDay = 24 * 60 * 60;
+	//NSNumber *maxKWval = [self maxkW] ;  /// The maximum value
+	NSNumber *maxKWval = [NSNumber numberWithInt:11718];
+	NSLog(@"   maxKWval : %d",[maxKWval intValue]);
+	
 	// Create graph from theme
 	graph = [[CPXYGraph alloc] initWithFrame:CGRectZero];
 	CPTheme *theme = [CPTheme themeNamed:kCPDarkGradientTheme];
@@ -33,15 +38,15 @@
 	CPXYPlotSpace *plotSpace = (CPXYPlotSpace *)graph.defaultPlotSpace;
 	
 	plotSpace.xRange = [CPPlotRange plotRangeWithLocation:CPDecimalFromFloat(1.0) length:CPDecimalFromFloat(20.0)];
-	plotSpace.yRange = [CPPlotRange plotRangeWithLocation:CPDecimalFromFloat(1.0) length:CPDecimalFromFloat([[self maxkW] floatValue]+20)];
+	plotSpace.yRange = [CPPlotRange plotRangeWithLocation:CPDecimalFromFloat(1.0) length:CPDecimalFromFloat([maxKWval floatValue]+20)];
 	
 	
     // Axes
 	CPXYAxisSet *axisSet = (CPXYAxisSet *)graph.axisSet;
     CPXYAxis *x = axisSet.xAxis;
     x.majorIntervalLength = CPDecimalFromFloat(oneDay);
-    x.constantCoordinateValue = CPDecimalFromString(@"4");
-    x.minorTicksPerInterval = 5;
+    x.constantCoordinateValue = CPDecimalFromString(@"2");
+    x.minorTicksPerInterval = 1;
     NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
     dateFormatter.dateStyle = kCFDateFormatterShortStyle;
     CPTimeFormatter *timeFormatter = [[[CPTimeFormatter alloc] initWithDateFormatter:dateFormatter] autorelease];
@@ -50,6 +55,8 @@
 	
 	CPXYAxis *y = axisSet.yAxis;
 	y.majorIntervalLength = CPDecimalFromString(@"5");
+	y.majorIntervalLength = CPDecimalFromFloat([maxKWval floatValue]/10);
+	
 	y.minorTicksPerInterval = 50;
 	y.constantCoordinateValue = CPDecimalFromString(@"4");
 	NSArray *exclusionRanges = [NSArray arrayWithObjects:
@@ -113,8 +120,10 @@
 	 [contentArray addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:x, @"x", y, @"y", nil]];
 	 }*/
 	self.dataForPlot = [self loadAndPreprocessData];
+	[self adjustPlotRangeToData];
+//	self.dataForPlot = [self loadAndPreprocessData];
 
-	NSLog(@"self.maxkW :  %d ", [[self maxkW] intValue]);
+	//NSLog(@"self.maxkW :  %d ", [[self maxkW] intValue]);
 }
 
 -(void)changePlotRange 
@@ -124,6 +133,22 @@
 	plotSpace.xRange = [CPPlotRange plotRangeWithLocation:CPDecimalFromFloat(0.0) length:CPDecimalFromFloat(3.0 + 2.0)];
 	plotSpace.yRange = [CPPlotRange plotRangeWithLocation:CPDecimalFromFloat(0.0) length:CPDecimalFromFloat(3.0 + 2.0*rand()/RAND_MAX)];
 }
+-(void)adjustPlotRangeToData
+{
+	NSDictionary *firstDatapoint = [self.dataForPlot objectAtIndex:0];
+	NSDictionary *lastDatapoint = [self.dataForPlot lastObject];
+	
+	NSDecimal start = CPDecimalFromInt([[firstDatapoint objectForKey:@"x"] intValue]);
+	NSDecimal length = CPDecimalSubtract(CPDecimalFromInt([[lastDatapoint objectForKey:@"x"] intValue]), start);
+	
+	CPXYPlotSpace *plotSpace = (CPXYPlotSpace *)graph.defaultPlotSpace;
+	plotSpace.xRange = [CPPlotRange plotRangeWithLocation:start length:length];
+	
+	CPXYAxisSet *axisSet = (CPXYAxisSet *)graph.axisSet;
+	CPXYAxis *yAxis = axisSet.yAxis; 
+	yAxis.constantCoordinateValue = start;
+}
+
 
 - (NSArray *)loadAndPreprocessData
 {
@@ -147,10 +172,12 @@
 	for (NSDictionary *recording in meterRecordings) {
 		NSNumber *meterValue = [recording objectForKey:@"meterValue"];
 		NSNumber *deltaValue = [NSNumber numberWithInt:[meterValue intValue] ];
-		NSNumber *timestamp = [NSNumber numberWithInt:[meterRecordings indexOfObject:recording]];
+		//NSNumber *timestamp = [NSNumber numberWithInt:[meterRecordings indexOfObject:recording]];
+		NSDate *timestamp = [recording objectForKey:@"timestamp"];
+		NSNumber *timestampValue = [NSNumber numberWithInt:[timestamp timeIntervalSince1970]];
 		lastMeterValue = meterValue;
 		NSLog(@"  timestamp: %@   value :%@", [timestamp description], [deltaValue description]);
-		[processedData addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:timestamp, @"x", deltaValue, @"y", nil]];
+		[processedData addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:timestampValue, @"x", deltaValue, @"y", nil]];
 	}
 	
 	return processedData;
@@ -158,7 +185,7 @@
 
 
 // Returns the max kW value-
-- (NSInteger * ) maxkW{
+- (NSNumber * ) maxkW{
 	// Load the previous recordings from disk
 	
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -176,13 +203,15 @@
 	
 	
 	NSNumber *maxKWValueSoFar = [NSNumber numberWithInt:0];
-	NSMutableArray *processedData = [NSMutableArray array];
+	//NSMutableArray *processedData = [NSMutableArray array];
 	for (NSDictionary *recording in meterRecordings) {
 		NSNumber *meterValue = [recording objectForKey:@"meterValue"];
 		if (meterValue > maxKWValueSoFar) {
 			maxKWValueSoFar = meterValue;
 		}
 	}
+	
+	[meterRecordings release];
 	
 	return maxKWValueSoFar;
 }
