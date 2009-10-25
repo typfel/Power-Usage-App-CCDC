@@ -31,9 +31,16 @@
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
-    [super viewDidLoad];
-  // Load the previous recordings from disk
+  [super viewDidLoad];
   
+  meterValues[0] = meterValue1;
+  meterValues[1] = meterValue2;
+  meterValues[2] = meterValue3;
+  meterValues[3] = meterValue4;
+  meterValues[4] = meterValue5;
+  meterValues[5] = meterValue6;
+  
+  // Load the previous recordings from disk
   NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
   NSString *documentsDirectory = [paths objectAtIndex:0];
   if (!documentsDirectory) {
@@ -46,6 +53,17 @@
   
   if (meterRecordings == nil)
     meterRecordings = [[NSMutableArray alloc] init];
+  else {
+    NSDictionary *lastRecording = [meterRecordings lastObject];
+    NSNumber *lastMeterValue = [lastRecording objectForKey:@"meterValue"];
+    NSString *meterValueAsString =  [lastMeterValue stringValue];
+    
+    int j = 5;
+    for (int i = [meterValueAsString length] -1; i >= 0 ; i--) {
+      meterValues[j].text = [NSString stringWithFormat:@"%c", [meterValueAsString characterAtIndex:i]];
+      j--;
+    }
+  }
 }
 
 
@@ -70,7 +88,6 @@
 }
 
 - (IBAction)storeMeterReading:(id)sender {
-  
   
   NSString *meterField = [NSString stringWithFormat:@"%@%@%@%@%@%@", 
                           meterValue1.text, meterValue2.text, meterValue3.text,

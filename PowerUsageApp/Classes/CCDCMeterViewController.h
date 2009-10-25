@@ -17,6 +17,7 @@
   UITextField *meterValue5;
   UITextField *meterValue6;
   
+  UITextField *meterValues[6];
   NSMutableArray *meterRecordings;
 }
 
