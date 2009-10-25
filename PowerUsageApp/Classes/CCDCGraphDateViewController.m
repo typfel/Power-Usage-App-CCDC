@@ -26,7 +26,7 @@
   [graph applyTheme:theme];
   CPLayerHostingView *hostingView = (CPLayerHostingView *)self.view;
   hostingView.hostedLayer = graph;
-  
+    
   graph.paddingLeft = 5.0;
   graph.paddingTop = 5.0;
   graph.paddingRight = 5.0;
@@ -37,12 +37,11 @@
   plotSpace.xRange = [CPPlotRange plotRangeWithLocation:CPDecimalFromFloat(0.0) length:CPDecimalFromFloat(oneDay * 365)];
   plotSpace.yRange = [CPPlotRange plotRangeWithLocation:CPDecimalFromFloat(0.0) length:CPDecimalFromFloat(1050.0)];
   
-  
   // Axes
 	CPXYAxisSet *axisSet = (CPXYAxisSet *)graph.axisSet;
   CPXYAxis *x = axisSet.xAxis;
   x.majorIntervalLength = CPDecimalFromFloat(oneDay * 7);
-  x.constantCoordinateValue = CPDecimalFromString(@"10");
+  x.constantCoordinateValue = CPDecimalFromString(@"0");
   x.minorTicksPerInterval = 0;
   NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
   dateFormatter.dateStyle = kCFDateFormatterShortStyle;
@@ -53,7 +52,11 @@
   CPXYAxis *y = axisSet.yAxis;
   y.majorIntervalLength = CPDecimalFromString(@"100");
   y.minorTicksPerInterval = 0;
-  y.constantCoordinateValue = CPDecimalFromString(@"100");
+  y.constantCoordinateValue = CPDecimalFromFloat(oneDay * 7 * 10); //CPDecimalFromString(@"100");
+  y.axisLabelOffset = -60;
+  y.title = @"kWh";
+  y.axisTitleOffset = 45.0f;
+  
   NSArray *exclusionRanges = [NSArray arrayWithObjects:
                               [CPPlotRange plotRangeWithLocation:CPDecimalFromFloat(0.00) length:CPDecimalFromFloat(10.0)], 
                               nil];
@@ -80,9 +83,22 @@
   boundLinePlot.areaFill = areaGradientFill;
   boundLinePlot.areaBaseValue = [[NSDecimalNumber zero] decimalValue];
   
+  /*
   // Make a green zone
-  //graph.backgroundColor [CPFill fillWithColor:greenZoneColor];
+  greenZoneData = [[NSMutableArray alloc] initWithObjects:
+                   [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:0], @"x", [NSNumber numberWithInt:300], @"y", nil],
+                   [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:INT_MAX], @"x", [NSNumber numberWithInt:300], @"y", nil], nil];
   
+  CPScatterPlot *greenZonePlot = [[[CPScatterPlot alloc] init] autorelease];
+  greenZonePlot.identifier = @"Green Zone";
+  greenZonePlot.dataLineStyle.lineWidth = 0.0f;
+  greenZonePlot.dataSource = greenZoneData;
+  
+  CPColor *greenZoneColor = [CPColor colorWithComponentRed:0.2 green:0.7 blue:0.2 alpha:0.8];
+  CPFill *greenZoneFill = [CPFill fillWithColor:greenZoneFill];
+  boundLinePlot.areaFill = greenZoneFill;
+  boundLinePlot.areaBaseValue = [[NSDecimalNumber zero] decimalValue];
+   */
   
   // Add plot symbols
   CPLineStyle *symbolLineStyle = [CPLineStyle lineStyle];
@@ -144,11 +160,16 @@
       
   CPXYPlotSpace *plotSpace = (CPXYPlotSpace *)graph.defaultPlotSpace;
   plotSpace.xRange = [CPPlotRange plotRangeWithLocation:start length:length];
+  
+  CPXYAxisSet *axisSet = (CPXYAxisSet *)graph.axisSet;
+  CPXYAxis *yAxis = axisSet.yAxis; 
+  yAxis.constantCoordinateValue = start;
 }
 
 - (NSMutableArray *)loadAndPreprocessData
 {
 	// Load the previous recordings from disk
+  NSTimeInterval oneWeek = 7 * 24 * 60 * 60;
 	
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -164,16 +185,23 @@
 		meterRecordings = [[NSMutableArray alloc] init];
 	
 	NSNumber *lastMeterValue = [NSNumber numberWithInt:0];
+  NSNumber *lastTimestampValue = [NSNumber numberWithInt:0];
 	NSMutableArray *processedData = [NSMutableArray array];
 	for (NSDictionary *recording in meterRecordings) {
 		NSNumber *meterValue = [recording objectForKey:@"meterValue"];
 		NSNumber *deltaValue = [NSNumber numberWithInt:[meterValue intValue] -  [lastMeterValue intValue]];
 		//NSNumber *timestamp = [NSNumber numberWithInt:[meterRecordings indexOfObject:recording]];
+    
     NSDate *timestamp = [recording objectForKey:@"timestamp"];
     NSNumber *timestampValue = [NSNumber numberWithInt:[timestamp timeIntervalSince1970]];
+    NSNumber *timestampDeltaValue = [NSNumber numberWithInt:[timestampValue intValue] - [lastTimestampValue intValue]];
+    double weight = (double)oneWeek / [timestampDeltaValue doubleValue];
+    NSNumber *weightedDeltaValue = [NSNumber numberWithDouble:[deltaValue doubleValue] * weight];
+    
 		lastMeterValue = meterValue;
+    lastTimestampValue = timestampValue;
 		NSLog(@"  timestamp: %@   value :%@", [timestamp description], [deltaValue description]);
-		[processedData addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:timestampValue, @"x", deltaValue, @"y", nil]];
+		[processedData addObject:[NSMutableDictionary dictionaryWithObjectsAndKeys:timestampValue, @"x", weightedDeltaValue, @"y", nil]];
 	}
 	
 	return processedData;

@@ -15,6 +15,8 @@
 	CPXYGraph *graph;
   NSMutableArray *data;
 	NSMutableArray *dataForPlot;
+  
+  NSMutableArray *greenZoneData;
 	
 }
 
