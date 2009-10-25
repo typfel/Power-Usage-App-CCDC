@@ -13,11 +13,14 @@
 @interface CCDCGraphDateViewController : UIViewController <CPPlotDataSource> {
 	  IBOutlet CPLayerHostingView *hostView;
 	CPXYGraph *graph;
+  NSMutableArray *data;
 	NSMutableArray *dataForPlot;
 	
 }
-- (NSArray *)loadAndPreprocessData;
 
 @property(readwrite, retain, nonatomic) NSMutableArray *dataForPlot;
+
+- (NSMutableArray *)loadAndPreprocessData;
+- (void)adjustPlotRangeToData;
 
 @end
